@@ -43,7 +43,9 @@ The emitter service should connect to the listener service over sockets and peri
 The Listener service will allow an emitter to connect to it via sockets. On receipt of the encrypted message stream, the listener should decrypt this string and retrieve the data in the payload. Validate the objects using the secret_key to ensure data integrity. If the data integrity of any object is compromised then discard that operation and move on to the next in the queue.
 
 On successful object data integrity validation, add a timestamp to that object and save it to a mongoDB collection modelled for saving time-series data where each document should be corresponding to the minute in which it is received. e.g. for data received for a person between 14:00 to 14:01 all records are added in a single document as a timeseries. Design the schema is such a manner to allow for optimal performance for aggregation timeseries queries.
-###Solution
+
+## Solution
+
 **client.js** - encrypted message over spefic interval of time.
 ![data](https://github.com/hiteshTS/encrypted-timeseries/assets/137639073/b4d1c288-0678-4079-a04d-019645ccb079)
 **server.js**  -decrypt it and forms the batch of data every mintue.
